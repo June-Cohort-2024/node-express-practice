@@ -13,6 +13,18 @@ app.get('/people', async (req, res)=>{
 
 })
 
+app.get('/people/:id', async (req, res)=>{
+
+    // select operation
+
+    const id_people = req.params.id
+    
+    const sql = `select * from people where id_people = ${id_people}`
+    const result = await db.default.query(sql)
+    res.json(result)
+
+})
+
 app.post('/people', async(req, res)=>{
 
     // insert operation 
@@ -61,6 +73,15 @@ app.delete('/people/:id', async(req, res)=>{
 app.get('/car', async(req, res)=>{
 
     const sql = `select * from cars`
+    const result = await db.default.query(sql)
+    res.json(result)
+
+})
+
+app.get('/car/:id', async(req, res)=>{
+
+    const id = req.params.id
+    const sql = `select * from cars where id_car = ${id}`
     const result = await db.default.query(sql)
     res.json(result)
 
