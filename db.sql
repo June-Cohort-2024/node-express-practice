@@ -13,3 +13,9 @@ create table people (
     last_name text,
     age numeric
 );
+
+insert into cars 
+(make, model, year)
+values 
+('Toyota', 'Camry', 2020),
+('Tesla', 'Tesla', 2024);

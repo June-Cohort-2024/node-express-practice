@@ -58,6 +58,50 @@ app.delete('/people/:id', async(req, res)=>{
 
 })
 
+app.get('/car', async(req, res)=>{
+
+    const sql = `select * from cars`
+    const result = await db.default.query(sql)
+    res.json(result)
+
+})
+
+app.post('/car', async(req, res)=>{
+
+    const sql = `insert into cars ( make, model , year) values ($1, $2, $3)`
+    const temp = req.body
+    const arr = [temp.make, temp.model, temp.year]
+    const result = await db.default.query(sql, arr)
+    res.json({message: "Car Created"})
+
+})
+
+app.put('/car/:id', async(req, res)=>{
+
+    const id_car = req.params.id
+
+    const sql = `update cars 
+                    set make = $1, 
+                        model = $2, 
+                        year = $3
+                where id_car = $4`
+    const temp = req.body
+    const arr = [temp.make, temp.model, temp.year, id_car]
+    const result = await db.default.query(sql, arr)
+    res.json({message: "Car Updated"})
+
+})
+
+app.delete('/car/:id', async(req,res)=>{
+
+    const id_car = req.params.id
+    const sql = `delete from cars where id_car = $1`
+    const arr  = [id_car]
+    const result = await db.default.query(sql, arr)
+    res.json({message: "Car Deleted"})
+
+})
+
 
 app.listen(4000, ()=>{
     console.log("Project Online")
